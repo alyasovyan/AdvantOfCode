@@ -1,6 +1,7 @@
 'use strict';
 
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
+import process from 'node:process';
 dotenv.config();
 
 const data = process.env.DATA;
@@ -22,3 +23,8 @@ for(let i = 0; i < arrayOfData.length; i++) {
 }
 
 console.log(Math.max(...arrayOfSum));
+
+/** Part 2 */
+arrayOfSum.sort((a, b) => a < b ? 1 : a > b ? -1 : 0);
+const sumOfThree = arrayOfSum[0] + arrayOfSum[1] + arrayOfSum[2];
+console.log('>>sumOfThree', sumOfThree);
