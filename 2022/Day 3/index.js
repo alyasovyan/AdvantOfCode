@@ -9,20 +9,34 @@ function main() {
     const indexObject = generateIndexObject();
     const data = process.env.DATA;
     const arrayOfData = data.split('\n');
-    let sum = 0;
+    let sumFirstPart = 0;
+    let sumSecondPart = 0
 
     for(const rucksacks of arrayOfData) {
         const { firstPart, secondPart } = sliceArray(rucksacks);
         for(const letter of firstPart) {
             if(secondPart.includes(letter)) {
-                sum += indexObject[letter];
+                sumFirstPart += indexObject[letter];
                 break;
             }
         }
     }
 
-    console.log('>>sum,', sum);
+    console.log('>>sumFirstPart,', sumFirstPart)
 
+    for(let i = 0; i < arrayOfData.length; i += 3) {
+        const firstLine = arrayOfData[i].trim();
+        const secondLine = arrayOfData[i + 1].trim();
+        const thirdLine = arrayOfData[i + 2].trim();
+        for(const letter of firstLine) {
+            if(secondLine.includes(letter) && thirdLine.includes(letter)) {
+                sumSecondPart += indexObject[letter];
+                break;
+            }
+        }
+    }
+
+    console.log('>>sumSecondPart,', sumSecondPart)
 }
 
 function sliceArray(string) {
