@@ -1,2 +1,2 @@
 # AdvantOfCode
-<a href="https://adventofcode.com/">adventofcode.com/</a>
+<a href="https://adventofcode.com/">adventofcode.com</a>
