@@ -5,7 +5,7 @@ dotenv.config();
 main();
 
 function main() {
-    let firstTaskString = "";
+    let taskString = "";
     const schema = generateSchema(process.env.SCHEMA.split('\n').filter(item => item));
     const data = process.env.DATA
     const arrayOfData = data.split('\n');
@@ -24,11 +24,11 @@ function main() {
     for(let i = 0; i < schema.length; i++) {
         const lastElement = schema[i].length - 1
         if(lastElement !== -1) {
-            firstTaskString += schema[i][lastElement][1]
+            taskString += schema[i][lastElement][1]
         }
     }
 
-    console.log('>>firstTastString ', firstTaskString);
+    console.log('>>taskString ', taskString);
 }
 
 function takeFrom(schema, count, from) {
@@ -37,7 +37,11 @@ function takeFrom(schema, count, from) {
 }
 
 function pushTo(schema, to, array) {
-    schema[to - 1] = schema[to - 1].concat(array.reverse());
+    /** @param(.concat(param))
+     * first task param - array.reverse()
+     * second task param - array
+    */
+    schema[to - 1] = schema[to - 1].concat(array);
 }
 
 function generateSchema(array) {
