@@ -5,30 +5,41 @@ dotenv.config();
 main();
 
 function main() {
-    let firstTaskIndex = 0;
-    const data = process.env.DATA
-    for(let i = 3; i < data.length; i++) {
-        const result = check(data, i)
+    let taskIndex = 0;
+    const data = process.env.DATA;
+    /** @param(i)
+     * first task param - i = 3
+     * second task param - i = 14
+     */
+    for(let i = 14; i < data.length; i++) {
+        const end = i;
+        const start = i - 14;
+        const result = check(data, start, end);
         if(result) {
-            firstTaskIndex = i + 1;
-            break
+            /** @param(end)
+             * first task param - i + 1
+             * second task param - end
+             */
+            taskIndex = i;
+            break;
         }
     }
 
-    console.log('>>firstTaskIndex', firstTaskIndex)
+    console.log('>>taskIndex', taskIndex);
 }
 
-function check(data, i) {
-    const array = []
-    array.push(data[i - 3]);
-    array.push(data[i - 2]);
-    array.push(data[i - 1]);
-    array.push(data[i]);
+function check(data, start, end) {
+    /** @param(end)
+     * first task param - end + 1
+     * second task param - end
+     */
+    const string = data.slice(start, end);
+    const array = string.split("");
 
     const results = array.reduce((acc, el) => {
         acc[el] = (acc[el] || 0) + 1;
         return acc;
-    }, {})
+    }, {});
 
     return Object.values(results).findIndex(item => item > 1) === -1;
 }
