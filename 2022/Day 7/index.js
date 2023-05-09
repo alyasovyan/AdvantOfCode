@@ -6,12 +6,14 @@ main();
 
 function main() {
     let sum = 0;
+    const diskMemory = 70000000;
+    const memoryNeed = 30000000;
     const data = process.env.DATA;
     const arrayOfData = data.split('\n')
     const object = {};
     const path = [];
     for(let i = 0; i < arrayOfData.length; i++) {
-        const command = arrayOfData[i].split(" ");
+        const command = arrayOfData[i].trim().split(" ");
         if(command[1] === "cd" && command[2] === "..") {
             path.pop();
             continue;
@@ -29,8 +31,13 @@ function main() {
         }
     }
 
+    const unUsedMemory = diskMemory - object['/'];
+    const needForFree = memoryNeed - unUsedMemory;
+    const closest = Object.values(object).filter(item => item >= needForFree)
+    console.log('>>min', Math.min(...closest))
+
     for(const key in object) {
-        if(object[key] < 100000) sum += object[key]
+        if(object[key] < 100000) sum += object[key];
     }
     console.log(sum)
 }
